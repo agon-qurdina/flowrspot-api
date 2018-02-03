@@ -16,12 +16,12 @@ class AuthApiService
   def user
     # valid or invalid ?
     @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
-    @user || errors.add(:token, 'Invalid token') && nil
+    #@user || errors.add(:token, 'Invalid token') && nil
   end
 
   def decoded_auth_token
     # JsonWebToken
-    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header) if http_auth_header
   end
 
   def http_auth_header

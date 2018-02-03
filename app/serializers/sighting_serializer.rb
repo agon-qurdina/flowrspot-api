@@ -27,6 +27,9 @@ class SightingSerializer < ActiveModel::Serializer
 
   belongs_to :user, serializer: SightingsUserSerializer
 
+  has_many :likes, serializer: LikeSerializer
+  has_many :comments, serializer: CommentSerializer
+
   def picture
     object.picture.url(:medium)
   end

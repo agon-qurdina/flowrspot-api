@@ -44,6 +44,8 @@ class User < ApplicationRecord
    content_type: /\Aimage\/.*\z/
 
   has_many :sightings
+  has_many :likes
+  has_many :comments
 
   validates :first_name, presence: true
   validates :last_name, presence: true

@@ -20,6 +20,12 @@ Rails.application.routes.draw do
       resources :sightings, except: [:edit, :new] do
         resources :images, only: [:index, :create, :destroy],
                            controller: 'sightings/images'
+        resources :likes, only: [:index, :create],
+                  controller: 'sightings/likes' do
+        end
+        delete 'likes', to: 'sightings/likes#destroy'
+        resources :comments, only: [:index, :create, :destroy],
+                  controller: 'sightings/comments'
       end
 
       resources :flowers, only: [:index, :show, :create] do
@@ -28,6 +34,7 @@ Rails.application.routes.draw do
         end
         resources :images, only: [:index]
       end
+
 
     end
   end
