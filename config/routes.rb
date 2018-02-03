@@ -16,6 +16,7 @@ Rails.application.routes.draw do
           get :sightings, to: 'users/sightings#index'
         end
       end
+      get 'user/favourites', to: 'flowers/favourites#index'
 
       resources :sightings, except: [:edit, :new] do
         resources :images, only: [:index, :create, :destroy],
@@ -33,8 +34,8 @@ Rails.application.routes.draw do
           get :search, to: 'flowers#search'
         end
         resources :images, only: [:index]
+        resource :favourite, only: [:create, :destroy], controller: 'flowers/favourites'
       end
-
 
     end
   end

@@ -7,7 +7,7 @@ class Api::V1::Sightings::LikesController < Api::V1::Sightings::BaseController
 
   def create
     if @sighting.likes.where(user: current_user).count > 0
-      render json: @sighting.likes
+      render json: @sighting.likes, each_serializer: LikeSerializer
     else
       like = Like.new(user: current_user)
       if @sighting.likes << like

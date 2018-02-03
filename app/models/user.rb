@@ -46,6 +46,7 @@ class User < ApplicationRecord
   has_many :sightings
   has_many :likes
   has_many :comments
+  has_many :favourites
 
   validates :first_name, presence: true
   validates :last_name, presence: true
