@@ -75,7 +75,7 @@ RSpec.describe Api::V1::SightingsController, type: :controller do
     it 'should return 400 if sighting not found' do
       user = create(:user)
       flower = create(:flower)
-      sighting = create(:sighting)
+      # sighting = create(:sighting)
 
       sighting_params = {
         id: 0, # sighting.id,

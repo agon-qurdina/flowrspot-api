@@ -19,11 +19,24 @@ class Api::V1::FlowersController < Api::V1::BaseController
   end
 
   def show
-    render json: flower
+    render json: flower, serializer: FlowerSerializer
+  end
+
+  def create
+    @flower = Flower.new(flower_params)
+    if @flower.save
+      render json: @flower, serializer: FlowerSerializer
+    else
+      render json: { error: @flower.errors.full_messages }, status: 400
+    end
   end
 
   private
   def flower
     @flower = Flower.find(params[:id])
+  end
+
+  def flower_params
+    params.permit(:name, :latin_name, :features, :description, :profile_picture)
   end
 end

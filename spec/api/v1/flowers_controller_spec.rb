@@ -61,4 +61,43 @@ RSpec.describe Api::V1::FlowersController, type: :controller do
     end
   end
 
+  describe 'create' do
+    it 'should return create a flower' do
+      flower_params = {
+          name: 'Rose',
+          latin_name: 'Rosa',
+          features: 'Features...' ,
+          description: 'A rose is a woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears.'
+      }
+      post :create, params: flower_params
+      expect(response.status).to eq(200)
+      result = JSON.load(response.body)
+      expect(result['flower']['name']).to eq(flower_params[:name])
+    end
+
+    it 'should return status 400 and error if no name provided' do
+      flower_params = {
+          latin_name: 'Rosa',
+          features: 'Features...' ,
+          description: 'A rose is a woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears.'
+      }
+      post :create, params: flower_params
+      expect(response.status).to eq(400)
+      result = JSON.load(response.body)
+      expect(result).to have_key('error')
+    end
+
+    it 'should return status 400 and error if no latin_name provided' do
+      flower_params = {
+          name: 'Rose',
+          features: 'Features...' ,
+          description: 'A rose is a woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears.'
+      }
+      post :create, params: flower_params
+      expect(response.status).to eq(400)
+      result = JSON.load(response.body)
+      expect(result).to have_key('error')
+    end
+  end
+
 end

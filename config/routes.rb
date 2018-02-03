@@ -22,7 +22,7 @@ Rails.application.routes.draw do
                            controller: 'sightings/images'
       end
 
-      resources :flowers, only: [:index, :show] do
+      resources :flowers, only: [:index, :show, :create] do
         collection do
           get :search, to: 'flowers#search'
         end
