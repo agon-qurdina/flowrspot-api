@@ -16,5 +16,5 @@
 
 class FavouriteSerializer < ActiveModel::Serializer
   # attributes :id
-  belongs_to :flower
+  belongs_to :flower, serializer: FlowersSerializer
 end

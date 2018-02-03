@@ -22,4 +22,5 @@
 
 class FlowerSerializer < ActiveModel::Serializer
   attributes :id, :name, :latin_name
+  has_many :sightings, serializer: SightingsSerializer
 end
