@@ -39,6 +39,7 @@ gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
 gem 'active_model_serializers', '~> 0.10.6'
 gem 'bootstrap', '~> 4.0.0.beta'
+gem 'pg_search'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

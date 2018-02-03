@@ -16,6 +16,7 @@ class Api::V1::SightingsController < Api::V1::BaseController
 
   def create
     @sighting = Sighting.new(sighting_params)
+    @sighting.user = current_user
     if @sighting.save
       render json: @sighting, serializer: SightingSerializer
     else
@@ -42,7 +43,7 @@ class Api::V1::SightingsController < Api::V1::BaseController
   protected
 
   def sighting_params
-    params.permit(:flower_id, :user_id, :name, :description, :latitude,
+    params.permit(:flower_id, :name, :description, :latitude,
       :longitude, :picture)
   end
 end

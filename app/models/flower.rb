@@ -21,6 +21,8 @@
 #
 
 class Flower < ApplicationRecord
+  include PgSearch
+
   has_attached_file :profile_picture,
     styles: { medium: '300x300>', thumb: '100x100>' },
     default_url: '/images/:style/missing.png'
@@ -31,6 +33,8 @@ class Flower < ApplicationRecord
   validates :latin_name, presence: true
 
   scope :alphabetical, ->() { order(:name) }
+
+  pg_search_scope :search_by_names, :against => [:name, :latin_name]
 
   has_many :sightings
   has_many :images, dependent: :destroy

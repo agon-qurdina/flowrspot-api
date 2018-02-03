@@ -78,7 +78,7 @@ RSpec.describe Api::V1::SightingsController, type: :controller do
       sighting = create(:sighting)
 
       sighting_params = {
-        id: sighting.id,
+        id: 0, # sighting.id,
         flower_id: flower.id,
         name: 'Apix',
         description: 'Mijav',
