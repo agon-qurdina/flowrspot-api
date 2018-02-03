@@ -3,14 +3,14 @@ class Api::V1::Sightings::CommentsController < Api::V1::Sightings::BaseControlle
   before_action :set_comment, only: [:destroy]
 
   def index
-    render json: @sighting.comments, each_serializer: CommentSerializer
+    render json: @sighting.comments.page(params[:page]).per(params[:per_page]), meta: generate_pagination(@sighting.comments), each_serializer: CommentSerializer
   end
 
   def create
     comment = Comment.new(comment_params)
     comment.user = current_user
     if @sighting.comments << comment
-      render json: @sighting.comments, each_serializer: CommentSerializer
+      render json: @sighting.comments.page(params[:page]).per(params[:per_page]), meta: generate_pagination(@sighting.comments), each_serializer: CommentSerializer
     else
       render json: { error: comment.errors.full_messages }, status: 400
     end
@@ -19,7 +19,7 @@ class Api::V1::Sightings::CommentsController < Api::V1::Sightings::BaseControlle
   def destroy
     if @comment.user == current_user
       @comment.destroy
-      return render json: @sighting.comments, each_serializer: CommentSerializer
+      return render json: @sighting.comments.page(params[:page]).per(params[:per_page]), meta: generate_pagination(@sighting.comments), each_serializer: CommentSerializer
     end
     render json: '', status: :unauthorized
   end
