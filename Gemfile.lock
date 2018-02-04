@@ -659,6 +659,10 @@ GEM
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
+    geokit (1.11.0)
+    geokit-rails (2.3.0)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     has_scope (0.7.1)
@@ -885,6 +889,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.8)
   faker (~> 1.8, >= 1.8.4)
+  geokit-rails
   jbuilder (~> 2.5)
   jwt (~> 2.0)
   kaminari (~> 1.0, >= 1.0.1)

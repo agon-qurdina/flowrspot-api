@@ -1,6 +1,6 @@
 class NotifierMailer < ApplicationMailer
   def daily_stats_email(users_count, sightings_count, favourites_count)
-    @user = User.first
+    @user = AdminUser.first
     if @user
       @users_count = users_count
       @sightings_count = sightings_count

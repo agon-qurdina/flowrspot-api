@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get 'user/favourites', to: 'flowers/favourites#index'
 
       resources :sightings, except: [:edit, :new] do
+        collection do
+          post 'search_by_location', to: 'sightings#search_by_location', controller: 'sightings'
+        end
         resources :images, only: [:index, :create, :destroy],
                            controller: 'sightings/images'
         resources :likes, only: [:index, :create],

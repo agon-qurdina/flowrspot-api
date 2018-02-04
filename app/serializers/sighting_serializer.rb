@@ -7,8 +7,8 @@
 #  user_id              :integer
 #  name                 :string
 #  description          :text
-#  latitude             :float
-#  longitude            :float
+#  latitude             :decimal(10, 6)
+#  longitude            :decimal(10, 6)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  picture_file_name    :string
@@ -19,6 +19,8 @@
 # Indexes
 #
 #  index_sightings_on_flower_id  (flower_id)
+#  index_sightings_on_latitude   (latitude)
+#  index_sightings_on_longitude  (longitude)
 #  index_sightings_on_user_id    (user_id)
 #
 
