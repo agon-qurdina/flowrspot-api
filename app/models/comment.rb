@@ -22,4 +22,9 @@ class Comment < ApplicationRecord
   validates :sighting, presence: true
   validates :user, presence: true
   validates :comment, presence: true
+
+  after_create do |comment|
+    sighting_user = comment.sighting.user
+    NotificationSender.new(sighting_user.fcm_token, "#{comment.user.full_name} just commented on your sighting").call
+  end
 end

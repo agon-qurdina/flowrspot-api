@@ -23,6 +23,7 @@
 #  profile_picture_file_size    :integer
 #  profile_picture_updated_at   :datetime
 #  sightings_count              :integer          default(0)
+#  fcm_token                    :string
 #
 # Indexes
 #

@@ -50,9 +50,19 @@ class Sighting < ApplicationRecord
   has_many :likes
   has_many :comments
 
+  def user_likes(user)
+    likes.where(user_id: user.id)
+  end
+
   acts_as_mappable :default_units => :kms,
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
+
+  after_create do |sighting|
+    user_ids = sighting.flower.favourites.pluck(:user_id)
+    user_tokens = User.where('id IN (?)', user_ids).pluck(:fcm_token);
+    NotificationSender.new(user_tokens, 'Your favourite flower just got a new sighting').call
+  end
 
   private
 

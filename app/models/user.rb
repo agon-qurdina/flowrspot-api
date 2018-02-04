@@ -23,6 +23,7 @@
 #  profile_picture_file_size    :integer
 #  profile_picture_updated_at   :datetime
 #  sightings_count              :integer          default(0)
+#  fcm_token                    :string
 #
 # Indexes
 #
@@ -47,6 +48,10 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
   has_many :favourites
+
+  def flower_favourites(flower)
+    favourites.where(flower_id: flower.id)
+  end
 
   validates :first_name, presence: true
   validates :last_name, presence: true
