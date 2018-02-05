@@ -11,7 +11,7 @@ ActiveAdmin.register Flower do
     column :latin_name
     column :features
     column :description
-    column 'Profile Picture' & :profile_picture_file_name
+    column :profile_picture_file_name
     column 'Favourites Count' do |flower|
       flower.favourites.count
     end
