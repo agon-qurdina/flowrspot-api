@@ -21,6 +21,8 @@ class Like < ApplicationRecord
   validates :sighting, presence: true
   validates :user, presence: true
 
+  scope :get_mine, ->(current_user) { where(user_id: current_user.id) }
+
   after_create do |like|
     sighting_user = like.sighting.user
     NotificationSender.new(sighting_user.fcm_token, "#{like.user.full_name} just liked your sighting").call

@@ -10,9 +10,7 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :date_of_birth
-    column 'Profile Picture' do |user|
-      user.profile_picture_file_name
-    end
+    column :profile_picture_file_name
     column 'Favourite flowers Count' do |user|
       user.favourites.count
     end
@@ -44,16 +42,15 @@ ActiveAdmin.register User do
       @user.password = generated_password
       @user.password_confirmation = generated_password
       @user.save!
-      #TODO Send Registration email
       redirect_to admin_users_path
     rescue StandardError => e
       render html: "<div>#{e.message}</div>".html_safe
     end
 
     private
+
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name, :date_of_birth, :profile_picture)
     end
   end
-
 end

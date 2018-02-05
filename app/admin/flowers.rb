@@ -11,9 +11,7 @@ ActiveAdmin.register Flower do
     column :latin_name
     column :features
     column :description
-    column 'Profile Picture' do |flower|
-      flower.profile_picture_file_name
-    end
+    column 'Profile Picture' & :profile_picture_file_name
     column 'Favourites Count' do |flower|
       flower.favourites.count
     end
@@ -27,8 +25,8 @@ ActiveAdmin.register Flower do
   filter :features
   filter :description
 
-  form :html => { :enctype => "multipart/form-data" } do |f|
-    f.inputs "Details" do
+  form :html => { :enctype => 'multipart/form-data'} do |f|
+    f.inputs 'Details' do
       f.input :name
       f.input :latin_name
       f.input :features

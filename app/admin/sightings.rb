@@ -3,7 +3,10 @@ ActiveAdmin.register Sighting do
   # menu priority: 5
   config.per_page = 10
 
-  permit_params :id, :flower, :user, :name, :description, :latitude, :longitude, :picture, :comments_attributes => [:user_id, :comment], :likes_attributes => [:user_id]
+  permit_params :id, :flower, :user, :name, :description, :latitude, :longitude,
+                :picture,
+                comments_attributes: %i[user_id comment],
+                likes_attributes: %i[user_id]
 
   index do
     id_column
@@ -13,9 +16,7 @@ ActiveAdmin.register Sighting do
     column :description
     column :latitude
     column :longitude
-    column 'Picture' do |sighting|
-      sighting.picture_file_name
-    end
+    column :picture_file_name
     column 'Comments Count' do |sighting|
       sighting.comments.count
     end
@@ -34,8 +35,8 @@ ActiveAdmin.register Sighting do
   filter :latitude
   filter :longitude
 
-  form :html => { :enctype => "multipart/form-data" } do |f|
-    f.inputs "Details" do
+  form html: { enctype: 'multipart/form-data' } do |f|
+    f.inputs 'Details' do
       f.input :name
       f.input :description
       f.input :flower
@@ -57,8 +58,11 @@ ActiveAdmin.register Sighting do
     end
 
     private
+
     def sighting_params
-      params.require(:sighting).permit(:name, :description, :user_id, :flower_id, :latitude, :longitude, :picture)
+      params.require(:sighting).permit(:name, :description, :user_id,
+                                       :flower_id, :latitude, :longitude,
+                                       :picture)
     end
   end
 

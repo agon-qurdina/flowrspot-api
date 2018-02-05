@@ -5,7 +5,7 @@ class NotificationSender
   CHUNK_SIZE = 1000
 
   def initialize(user_device_ids, message)
-    user_device_ids = Array(user_device_ids) unless user_device_ids.kind_of?(Array)
+    user_device_ids = Array(user_device_ids) unless user_device_ids.is_a?(Array)
     @user_device_ids = user_device_ids
     @message = message
   end
@@ -13,7 +13,7 @@ class NotificationSender
   def call
     return if user_device_ids.empty?
     user_device_ids.each_slice(CHUNK_SIZE) do |device_ids|
-      response = fcm_client.send(device_ids, options)
+      fcm_client.send(device_ids, options)
     end
   end
 
