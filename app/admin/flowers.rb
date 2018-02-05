@@ -1,10 +1,7 @@
 ActiveAdmin.register Flower do
-
-  # menu priority: 2
   config.per_page = 10
-
-  permit_params :id, :name, :latin_name, :features, :description, :profile_picture, :favourites_attributes => [:user_id]
-
+  permit_params :id, :name, :latin_name, :features, :description,
+                :profile_picture, favourites_attributes: [:user_id]
   index do
     id_column
     column :name
@@ -15,17 +12,14 @@ ActiveAdmin.register Flower do
     column 'Favourites Count' do |flower|
       flower.favourites.count
     end
-
     actions
   end
-
   filter :id
   filter :name
   filter :latin_name
   filter :features
   filter :description
-
-  form :html => { :enctype => 'multipart/form-data'} do |f|
+  form html: { enctype: 'multipart/form-data' } do |f|
     f.inputs 'Details' do
       f.input :name
       f.input :latin_name
@@ -35,5 +29,4 @@ ActiveAdmin.register Flower do
     end
     f.actions
   end
-
 end
