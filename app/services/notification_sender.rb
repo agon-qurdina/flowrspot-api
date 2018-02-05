@@ -21,14 +21,9 @@ class NotificationSender
 
   def options
     {
-        # priority: 'high',
         data: {
             message: message
         }
-        # notification: {
-        #     body: message,
-        #     type: 'like'
-        # }
     }
   end
 

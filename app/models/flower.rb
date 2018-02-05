@@ -34,7 +34,7 @@ class Flower < ApplicationRecord
 
   scope :alphabetical, ->() { order(:name) }
 
-  pg_search_scope :search_by_names, :against => [:name, :latin_name]
+  pg_search_scope :search_by_names, against: [:name, :latin_name]
 
   has_many :sightings
   has_many :images, dependent: :destroy

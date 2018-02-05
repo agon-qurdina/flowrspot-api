@@ -10,7 +10,8 @@ class JsonWebToken
   def self.decode(token)
     # Rails.application.secrets.secret_key_base
     # ....
-    payload = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')[0]
+    payload = JWT.decode(token, Rails.application.secrets.secret_key_base,
+                         true, algorithm: 'HS256')[0]
     HashWithIndifferentAccess.new payload
   rescue JWT::DecodeError
     nil

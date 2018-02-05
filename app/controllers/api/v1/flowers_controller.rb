@@ -26,6 +26,7 @@ class Api::V1::FlowersController < Api::V1::BaseController
   end
 
   private
+
   def flower
     @flower = Flower.find(params[:id])
   end

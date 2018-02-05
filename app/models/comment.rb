@@ -25,6 +25,7 @@ class Comment < ApplicationRecord
 
   after_create do |comment|
     sighting_user = comment.sighting.user
-    NotificationSender.new(sighting_user.fcm_token, "#{comment.user.full_name} just commented on your sighting").call
+    NotificationSender.new(sighting_user.fcm_token, "#{comment.user.full_name} just
+commented on your sighting").call
   end
 end
