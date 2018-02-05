@@ -14,7 +14,7 @@ class Api::V1::Sightings::LikesController < Api::V1::Sightings::BaseController
   end
 
   def destroy
-    @sighting.my_likes(current_user).destroy_all
+    @sighting.user_likes(current_user).destroy_all
     render likes_response
   end
 
@@ -31,6 +31,6 @@ class Api::V1::Sightings::LikesController < Api::V1::Sightings::BaseController
   end
 
   def check_if_exists
-    render likes_response if @sighting.my_likes(current_user).count > 0
+    render likes_response if @sighting.user_likes(current_user).count > 0
   end
 end

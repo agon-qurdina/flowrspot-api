@@ -50,7 +50,7 @@ class Sighting < ApplicationRecord
   has_many :likes
   has_many :comments
 
-  def my_likes(user)
+  def user_likes(user)
     likes.where(user_id: user.id)
   end
 
