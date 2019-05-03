@@ -31,23 +31,25 @@ RSpec.describe Api::V1::FlowersController, type: :controller do
   end
 
   describe 'search' do
-    it 'should find the flower' do
-      flower = create(:flower, name: 'Aronia')
+    let!(:flower) { create(:flower, name: 'Aronia') }
 
-      get :search, params: { query: 'aronia' }
-      expect(response.status).to eq(200)
-      results = JSON.load(response.body)
-      expect(results['flowers'].count).to eq(1)
-      expect(results['flowers'][0]['name']).to eq(flower.name)
+    context 'name match' do
+      it 'finds the flower' do
+        get :search, params: { query: 'aronia' }
+        expect(response.status).to eq(200)
+        results = JSON.load(response.body)
+        expect(results['flowers'].count).to eq(1)
+        expect(results['flowers'][0]['name']).to eq(flower.name)
+      end
     end
 
-    it 'should return empty if no flower found' do
-      flower = create(:flower, name: 'Aronia')
-
-      get :search, params: { query: 'bethestha' }
-      expect(response.status).to eq(200)
-      results = JSON.load(response.body)
-      expect(results['flowers'].count).to eq(0)
+    context 'name mismatch' do
+      it 'returns empty' do
+        get :search, params: { query: 'bethestha' }
+        expect(response.status).to eq(200)
+        results = JSON.load(response.body)
+        expect(results['flowers'].count).to eq(0)
+      end
     end
   end
 
